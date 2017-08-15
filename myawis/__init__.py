@@ -144,6 +144,9 @@ def flatten_urlinfo(urlinfo, shorter_keys=True):
             elif last_prefix in ["RelatedLink", "CategoryData"]:
                 for i, v in enumerate(value):
                     flatten(v, ".".join([prefix, str(i)]))
+            elif last_prefix == "OwnedDomain":
+                for i, v in enumerate(value):
+                    _result[".".join([last_prefix, str(i)])] = v
             elif value[0].get("TimeRange"):
                 for v in value:
                     time_range = ".".join(tuple(v.pop("TimeRange").items())[0])
